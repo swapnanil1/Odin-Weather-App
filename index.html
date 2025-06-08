@@ -1,12 +1,31 @@
 <!doctype html>
-<html>
+<html class="h-full w-full">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="src/assets/styles/main.css" rel="stylesheet" />
     </head>
-    <body>
-        <div class="container"></div>
+    <body class="h-full w-full bg-neutral-800 text-neutral-200">
+        <div class="">
+            <form
+                id="form"
+                action=""
+                class="m-3.5 flex flex-col items-center justify-center gap-3"
+            >
+                <label class="text-3xl" for="search">Search Place</label>
+                <input
+                    type="text"
+                    id="search"
+                    class="rounded-xs border-2 border-neutral-200"
+                />
+                <button
+                    class="submit border-2 border-amber-300 bg-cyan-500 text-2xl"
+                    type="submit"
+                >
+                    Send query
+                </button>
+            </form>
+        </div>
     </body>
     <script type="module" src="/src/main.js"></script>
 </html>
