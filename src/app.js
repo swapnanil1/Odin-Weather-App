@@ -1,21 +1,28 @@
-// URL (required), options (optional)
-//https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[location]/[date1]/[date2]?key=YOUR_API_KEY
+import { fetchWeather } from './query'
+import * as localDB from './components/localDB'
 
-export async function fetchWeather(location) {
-    const id = 'SJRTXB4W9NF5US39PGU2MJHAH'
-    const data = await fetch(
-        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=${id}`
-    )
-    const useData = await data.json()
-    console.log(useData)
+export function app() {
+    // const apiJson = fetchWeather()
+    // console.log(apiJson.data.resolvedAddress)
 }
-
-export function formEvents() {
+export async function formEvents() {
     const locationInput = document.getElementById('search')
     const submitBtn = document.querySelector('.submit')
-    submitBtn.addEventListener('click', (e) => {
-        const location = locationInput.value
-        e.preventDefault()
-        fetchWeather(location)
+    const viewSaved = document.querySelector('.viewSaved')
+    viewSaved.addEventListener('click', () => {
+        console.log(localDB.getAllWeatherData())
+    })
+    submitBtn.addEventListener('click', async (e) => {
+        try {
+            // on each click create a weather-loc object and add it to localstorage
+            const location = locationInput.value
+            e.preventDefault()
+            const api = await fetchWeather(location)
+            localDB.saveWeatherData(api)
+            console.log(api)
+            console
+        } catch (error) {
+            console.log(error)
+        }
     })
 }
