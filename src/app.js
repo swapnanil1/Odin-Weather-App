@@ -2,27 +2,35 @@ import { fetchWeather } from './query'
 import * as localDB from './components/localDB'
 
 export function app() {
-    // const apiJson = fetchWeather()
-    // console.log(apiJson.data.resolvedAddress)
+    // Placeholder for app initialization logic
+    // const weatherData = fetchWeather()
+    // console.log(weatherData.data.resolvedAddress)
 }
+
 export async function formEvents() {
-    const locationInput = document.getElementById('search')
-    const submitBtn = document.querySelector('.submit')
-    const viewSaved = document.querySelector('.viewSaved')
-    viewSaved.addEventListener('click', () => {
-        console.log(localDB.getAllWeatherData())
+    const locationInputEl = document.getElementById('search')
+    const submitButtonEl = document.querySelector('.submit')
+    const viewSavedButtonEl = document.querySelector('.viewSaved')
+
+    viewSavedButtonEl.addEventListener('click', () => {
+        const savedWeatherData = localDB.getAllWeatherData()
+        console.log(savedWeatherData)
     })
-    submitBtn.addEventListener('click', async (e) => {
+
+    submitButtonEl.addEventListener('click', async (event) => {
+        event.preventDefault()
         try {
-            // on each click create a weather-loc object and add it to localstorage
-            const location = locationInput.value
-            e.preventDefault()
-            const api = await fetchWeather(location)
-            localDB.saveWeatherData(api)
-            console.log(api)
-            console
+            const location = locationInputEl.value.trim()
+            if (!location) {
+                console.warn('No location provided')
+                return
+            }
+
+            const weatherData = await fetchWeather(location)
+            localDB.saveWeatherData(weatherData)
+            console.log(weatherData)
         } catch (error) {
-            console.log(error)
+            console.error('Failed to fetch weather data:', error)
         }
     })
 }
