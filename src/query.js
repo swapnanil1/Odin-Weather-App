@@ -15,55 +15,43 @@ export async function fetchWeather(location) {
         const { days, currentConditions, resolvedAddress } = data
         const [today] = days
 
-        const dataToUse = {
+        const weatherSummary = {
             location: resolvedAddress,
-            lastUpdated: new Date().toISOString(),
-            grid_1: {
-                feelslike: today.feelslike,
-                feelslike_unit: '°F',
-                humidity: today.humidity,
-                humidity_unit: '%',
-                dew: today.dew,
-                dew_unit: '°F',
+            lastUpdatedISO: new Date().toISOString(),
+            overview_1: {
+                title: `Feels Like ${today.feelslike}°F`,
+                detailPrimary: `Humidity: ${today.humidity}%`,
+                detailSecondary: `Dew Point: ${today.dew}°F`,
             },
-            grid_2: {
-                tempmax: today.tempmax,
-                tempmax_unit: '°F',
-                tempmin: today.tempmin,
-                tempmin_unit: '°F',
-                currentConditions: currentConditions.conditions,
+            overview_2: {
+                title: `High: ${today.tempmax}°F / Low: ${today.tempmin}°F`,
+                detailPrimary: `Current Conditions: ${currentConditions.conditions}`,
+                detailSecondary: `Range: ${today.tempmin}°F – ${today.tempmax}°F`,
             },
-            grid_3: {
-                precipprob: today.precipprob,
-                precipprob_unit: '%',
-                precip: today.precip,
-                precip_unit: 'in',
-                precipcover: percentageToTime(today.precipcover),
-                precipcover_unit: 'h:m',
+            overview_3: {
+                title: `Precipitation: ${today.precipprob}% Chance`,
+                detailPrimary: `Rainfall: ${today.precip} in`,
+                detailSecondary: `Coverage Time: ${percentageToTime(today.precipcover)} h:m`,
             },
-            grid_4: {
-                windspeed: today.windspeed,
-                windspeed_unit: 'mph',
-                windgust: today.windgust,
-                windgust_unit: 'mph',
-                winddir: degreesToCompass(today.winddir),
+            overview_4: {
+                title: `Wind: ${today.windspeed} mph`,
+                detailPrimary: `Gusts: ${today.windgust} mph`,
+                detailSecondary: `Direction: ${degreesToCompass(today.winddir)}`,
             },
-            grid_5: {
-                uvindex: today.uvindex,
-                sunrise: today.sunrise,
-                sunset: today.sunset,
+            overview_5: {
+                title: `UV Index: ${today.uvindex}`,
+                detailPrimary: `Sunrise: ${today.sunrise}`,
+                detailSecondary: `Sunset: ${today.sunset}`,
             },
-            grid_6: {
-                visibility: today.visibility,
-                visibility_unit: 'mi',
-                pressure: today.pressure,
-                pressure_unit: 'mb',
-                moonphase: today.moonphase,
+            overview_6: {
+                title: `Visibility: ${today.visibility} mi`,
+                detailPrimary: `Pressure: ${today.pressure} mb`,
+                detailSecondary: `Moon Phase: ${today.moonphase}`,
             },
         }
 
-        console.log('Formatted and Saved Data:', dataToUse)
-        return dataToUse
+        console.log('Formatted and Saved Data:', weatherSummary)
+        return weatherSummary
     } catch (error) {
         console.error('Failed to fetch weather data:', error)
         return null
@@ -88,8 +76,11 @@ function percentageToTime(percent) {
 
     return `${paddedHours}:${paddedMinutes}`
 }
-
 function degreesToCompass(degrees) {
+    if (degrees === null || typeof degrees === 'undefined') {
+        return 'Direction: N/A'
+    }
+
     const directions = [
         'N',
         'NNE',
@@ -108,6 +99,13 @@ function degreesToCompass(degrees) {
         'NW',
         'NNW',
     ]
-    const index = Math.round(degrees / 22.5) % 16
-    return `${directions[index]} (${degrees.toFixed(1)}°)`
+
+    const fromIndex = Math.round(degrees / 22.5) % 16
+    const fromDirection = directions[fromIndex]
+
+    const oppositeDegrees = (degrees + 180) % 360
+    const toIndex = Math.round(oppositeDegrees / 22.5) % 16
+    const toDirection = directions[toIndex]
+
+    return `${fromDirection} to ${toDirection} at ${degrees.toFixed(1)}°`
 }

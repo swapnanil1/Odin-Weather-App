@@ -1,6 +1,6 @@
 import { fetchWeather } from './query'
 import * as localDB from './components/localDB'
-
+import renderWeather from './components/renderData'
 export function app() {
     // Placeholder for app initialization logic
     // const weatherData = fetchWeather()
@@ -28,6 +28,7 @@ export async function formEvents() {
 
             const weatherData = await fetchWeather(location)
             localDB.saveWeatherData(weatherData)
+            renderWeather(weatherData)
             console.log(weatherData)
         } catch (error) {
             console.error('Failed to fetch weather data:', error)
