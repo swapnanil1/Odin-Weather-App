@@ -10,27 +10,37 @@
             <form
                 id="form"
                 action=""
-                class="m-3.5 flex flex-col items-center justify-center gap-3"
+                class="nep-6 mx-auto my-10 flex max-w-md flex-col items-center gap-4 rounded-lg bg-neutral-700 p-5 text-neutral-300 shadow-lg"
             >
-                <label class="text-3xl" for="search">Search Place</label>
+                <label
+                    for="search"
+                    class="text-2xl font-semibold text-neutral-300"
+                    >Search Place</label
+                >
+
                 <input
                     type="text"
                     id="search"
-                    class="rounded-xs border-2 border-neutral-200"
+                    placeholder="Enter a location"
+                    class="w-99 rounded-md border border-gray-300 px-4 py-2 text-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none"
                 />
-                <button
-                    class="submit border-2 border-amber-300 bg-cyan-500 text-2xl"
-                    type="submit"
-                >
-                    Send query
-                </button>
-                <button
-                    class="viewSaved border-2 border-amber-300 bg-emerald-500 text-2xl"
-                    type="button"
-                >
-                    View Saved
-                </button>
+
+                <div class="flex w-99 justify-between gap-4">
+                    <button
+                        type="submit"
+                        class="submit flex-1 rounded-md border border-amber-300 bg-cyan-500 px-4 py-2 text-lg text-white transition hover:bg-cyan-600"
+                    >
+                        Send Query
+                    </button>
+                    <button
+                        type="button"
+                        class="viewSaved flex-1 rounded-md border border-amber-300 bg-emerald-500 px-4 py-2 text-lg text-white transition hover:bg-emerald-600"
+                    >
+                        View Saved
+                    </button>
+                </div>
             </form>
+            <div class="savedHistory"></div>
         </div>
         <div
             id="grid-container"

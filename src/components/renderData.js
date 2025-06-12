@@ -1,3 +1,4 @@
+import { animate, stagger } from 'motion'
 export default function renderWeather(weatherObject) {
     try {
         if (
@@ -33,22 +34,28 @@ export default function renderWeather(weatherObject) {
         console.error('Failed to render weather data:', error.message)
     }
 }
-
 function clearPage() {
     const gridContainer = document.getElementById('grid-container')
     gridContainer.innerHTML = ''
     console.log('cleared page')
 
+    const elementsToAnimate = []
+
     for (let index = 1; index <= 6; index++) {
         const div = document.createElement('div')
         div.classList.add(
             `overview_${index}`,
+            'text-neutal-300',
             'grid',
             'grid-cols-2',
             'grid-rows-2',
             'items-center',
             'border-2',
-            'border-teal-500'
+            'border-teal-500',
+            'bg-neutral-700',
+            'opacity-0',
+            'rounded-xl',
+            'translate-y-4'
         )
 
         const h2 = document.createElement('h2')
@@ -63,6 +70,14 @@ function clearPage() {
         div.appendChild(h2)
         div.appendChild(p1)
         div.appendChild(p2)
+
         gridContainer.appendChild(div)
+        elementsToAnimate.push(div)
     }
+    animate(
+        elementsToAnimate,
+        { opacity: 1, y: 0 },
+        { delay: stagger(0.1), duration: 0.5, easing: 'ease-out' }
+    )
+    console.log(elementsToAnimate)
 }

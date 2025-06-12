@@ -1,4 +1,5 @@
-const API_KEY = 'SJRTXB4W9NF5US39PGU2MJHAH'
+// const API_KEY = 'SJRTXB4W9NF5US39PGU2MJHAH'
+const API_KEY = '7XT6XT58ZY8WZ8YMMTB439YZJ'
 
 export async function fetchWeather(location) {
     try {
