@@ -6,7 +6,7 @@
     <link href="src/assets/styles/main.css" rel="stylesheet"/>
 </head>
 <body class="h-full w-full bg-neutral-800 font-[Inter] text-neutral-200">
-<div class="homeQueryForm pt-50">
+<div class="pt-50" id="homeQueryForm">
     <form
             action=""
             class="nep-6 mx-auto my-10 flex max-w-md flex-col items-center gap-4 rounded-lg bg-neutral-700 p-5 text-neutral-300 shadow-lg"
@@ -42,6 +42,34 @@
     </form>
     <div class="savedHistory"></div>
 </div>
+<!--BREAK-->
+<div class="hidden fixed top-0 left-0 w-full bg-neutral-800 p-3 shadow-md z-50" id="browseQueryForm">
+    <form
+            class="mx-auto flex max-w-4xl items-center gap-2"
+            id="compactSearchForm"
+    >
+        <label class="sr-only" for="search">Search Places</label>
+        <input
+                class="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none"
+                id="search"
+                placeholder="Enter a location"
+                type="text"
+        />
+        <button
+                class="rounded-md bg-cyan-500 px-4 py-2 text-sm text-white hover:bg-cyan-600 transition"
+                type="submit"
+        >
+            Search
+        </button>
+        <button
+                class="rounded-md bg-emerald-500 px-4 py-2 text-sm text-white hover:bg-emerald-600 transition"
+                type="button"
+        >
+            View Saved
+        </button>
+    </form>
+</div>
+
 </body>
 <script src="/src/main.js" type="module"></script>
 </html>

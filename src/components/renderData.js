@@ -38,9 +38,18 @@ export default function renderWeather(weatherObject) {
 
 function clearPage() {
     const oldGrid = document.getElementById('gridContainer')
+    const homeQueryForm = document.getElementById('homeQueryForm')
+    const browseQueryForm = document.getElementById('browseQueryForm')
     if (oldGrid) {
         oldGrid.innerHTML = ''
         document.body.removeChild(oldGrid)
+    }
+    if (
+        !homeQueryForm.classList.contains('hidden') &&
+        browseQueryForm.classList.contains('hidden')
+    ) {
+        homeQueryForm.classList.add('hidden')
+        browseQueryForm.classList.remove('hidden')
     }
 
     const elementsToAnimate = []
