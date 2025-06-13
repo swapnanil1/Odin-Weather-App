@@ -7,7 +7,6 @@ export async function fetchWeather(location) {
         const response = await fetch(
             `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${date}?unitGroup=us&include=current&key=${API_KEY}`
         )
-
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         }
@@ -77,6 +76,7 @@ function percentageToTime(percent) {
 
     return `${paddedHours}:${paddedMinutes}`
 }
+
 function degreesToCompass(degrees) {
     if (degrees === null || typeof degrees === 'undefined') {
         return 'Direction: N/A'

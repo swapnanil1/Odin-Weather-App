@@ -1,2 +1,3 @@
 import { formEvents } from './app'
-formEvents()
+
+formEvents().then(() => console.log('Weather Rendered Success'))

@@ -1,4 +1,5 @@
 import { animate, stagger } from 'motion'
+
 export default function renderWeather(weatherObject) {
     try {
         if (
@@ -34,13 +35,35 @@ export default function renderWeather(weatherObject) {
         console.error('Failed to render weather data:', error.message)
     }
 }
+
 function clearPage() {
-    const gridContainer = document.getElementById('grid-container')
-    gridContainer.innerHTML = ''
-    console.log('cleared page')
+    const oldGrid = document.getElementById('gridContainer')
+    if (oldGrid) {
+        oldGrid.innerHTML = ''
+        document.body.removeChild(oldGrid)
+    }
 
     const elementsToAnimate = []
 
+    const gridContainer = document.createElement('div')
+    gridContainer.id = 'gridContainer'
+    gridContainer.classList.add(
+        'm-10',
+        'grid',
+        'h-full',
+        'grid-cols-3',
+        'grid-rows-2',
+        'gap-20',
+        'text-center',
+        'text-2xlm-10',
+        'grid',
+        'h-full',
+        'grid-cols-3',
+        'grid-rows-2',
+        'gap-20',
+        'text-center',
+        'text-2xl'
+    )
     for (let index = 1; index <= 6; index++) {
         const div = document.createElement('div')
         div.classList.add(
@@ -74,10 +97,10 @@ function clearPage() {
         gridContainer.appendChild(div)
         elementsToAnimate.push(div)
     }
+    document.body.appendChild(gridContainer)
     animate(
         elementsToAnimate,
         { opacity: 1, y: 0 },
         { delay: stagger(0.1), duration: 0.5, easing: 'ease-out' }
     )
-    console.log(elementsToAnimate)
 }
