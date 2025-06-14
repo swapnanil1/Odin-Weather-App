@@ -3,16 +3,27 @@ const API_KEY = '7XT6XT58ZY8WZ8YMMTB439YZJ'
 
 export async function fetchWeather(location) {
     try {
-        const date = getTodayDate()
         const response = await fetch(
-            `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${date}?unitGroup=us&include=current&key=${API_KEY}`
+            `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=us&include=current&key=${API_KEY}`
         )
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         }
 
         const data = await response.json()
-        const { days, currentConditions, resolvedAddress } = data
+        console.log('Raw weather API response:', data)
+        const { resolvedAddress, days, currentConditions } = data || {}
+
+        if (!Array.isArray(days) || days.length === 0) {
+            throw new Error("Missing or invalid 'days' data from API")
+        }
+
+        if (!currentConditions || typeof currentConditions !== 'object') {
+            throw new Error(
+                "Missing or invalid 'currentConditions' data from API"
+            )
+        }
+
         const [today] = days
 
         const weatherSummary = {
@@ -26,7 +37,7 @@ export async function fetchWeather(location) {
             overview_2: {
                 title: `High: ${today.tempmax}°F / Low: ${today.tempmin}°F`,
                 detailPrimary: `Current Conditions: ${currentConditions.conditions}`,
-                detailSecondary: `Range: ${today.tempmin}°F – ${today.tempmax}°F`,
+                detailSecondary: `Range: ${today.tempmin}°F - ${today.tempmax}°F`,
             },
             overview_3: {
                 title: `Precipitation: ${today.precipprob}% Chance`,
@@ -56,10 +67,6 @@ export async function fetchWeather(location) {
         console.error('Failed to fetch weather data:', error)
         return null
     }
-}
-
-function getTodayDate() {
-    return new Date().toISOString().split('T')[0]
 }
 
 function percentageToTime(percent) {
