@@ -1,76 +1,89 @@
 <!doctype html>
 <html class="h-full w-full">
-<head>
-    <meta charset="UTF-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <link href="src/assets/styles/main.css" rel="stylesheet"/>
-</head>
-<body class="h-full w-full bg-neutral-800 font-[Inter] text-neutral-200">
-<div class="pt-50" id="homeQueryForm">
-    <form
-            action=""
-            class="nep-6 mx-auto my-10 flex max-w-md flex-col items-center gap-4 rounded-lg bg-neutral-700 p-5 text-neutral-300 shadow-lg"
-            id="form"
-    >
-        <img src="/src/assets/ico/logo.svg" alt="logo" srcset="" class="w-auto h-44">
-        <label
-                class="text-2xl font-semibold text-neutral-300"
-                for="search"
-        >Odin Weather</label
-        >
-
-        <input
-                class="w-99 rounded-md border border-gray-300 px-4 py-2 text-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none"
-                id="homePage"
-                placeholder="Enter a location"
-                type="text"
-        />
-
-        <div class="flex w-99 justify-between gap-4">
-            <button
-                    class="homePageSearch flex-1 rounded-md border border-amber-300 bg-cyan-500 px-4 py-2 text-lg text-white transition hover:bg-cyan-600"
-                    type="submit"
+    <head>
+        <meta charset="UTF-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <link href="src/assets/styles/main.css" rel="stylesheet" />
+    </head>
+    <body class="h-full w-full bg-neutral-800 font-[Inter] text-neutral-200">
+        <div class="pt-50" id="homeQueryForm">
+            <form
+                action=""
+                class="nep-6 mx-auto my-10 flex max-w-md flex-col items-center gap-4 rounded-lg bg-neutral-700 p-5 text-neutral-300 shadow-lg"
+                id="form"
             >
-                Search
-            </button>
-            <button
-                    class="viewSaved flex-1 rounded-md border border-amber-300 bg-emerald-500 px-4 py-2 text-lg text-white transition hover:bg-emerald-600"
-                    type="button"
-            >
-                View Saved
-            </button>
+                <img
+                    src="/src/assets/ico/logo.svg"
+                    alt="logo"
+                    srcset=""
+                    class="h-44 w-auto"
+                />
+                <label
+                    class="text-2xl font-semibold text-neutral-300"
+                    for="homePage"
+                    >Odin Weather</label
+                >
+
+                <input
+                    class="w-99 rounded-md border border-gray-300 px-4 py-2 text-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none"
+                    id="homePage"
+                    placeholder="Enter a location"
+                    type="text"
+                />
+
+                <div class="flex w-99 justify-between gap-4">
+                    <button
+                        class="homePageSearch flex-1 rounded-md border border-amber-300 bg-cyan-500 px-4 py-2 text-lg text-white transition hover:bg-cyan-600"
+                        type="submit"
+                    >
+                        Search
+                    </button>
+                    <button
+                        class="viewSaved flex-1 rounded-md border border-amber-300 bg-emerald-500 px-4 py-2 text-lg text-white transition hover:bg-emerald-600"
+                        type="button"
+                    >
+                        View Saved
+                    </button>
+                </div>
+            </form>
+            <div class="savedHistory"></div>
         </div>
-    </form>
-    <div class="savedHistory"></div>
-</div>
-<!--BREAK-->
-<div class="hidden fixed top-0 left-0 w-full bg-neutral-800 p-3 shadow-md z-50" id="browseQueryForm">
-    <form
-            class="mx-auto flex max-w-4xl items-center gap-2"
-            id="compactSearchForm"
-    >
-        <label class="sr-only" for="search">Search Places</label>
-        <input
-                class="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none"
-                id="browsePage"
-                placeholder="Enter a location"
-                type="text"
-        />
-        <button
-                class="browsePageSearch rounded-md bg-cyan-500 px-4 py-2 text-sm text-white hover:bg-cyan-600 transition"
-                type="submit"
+        <!--BREAK-->
+        <div
+            class="fixed top-0 left-0 z-50 hidden w-full bg-neutral-700 p-3 shadow-md"
+            id="browseQueryForm"
         >
-            Search
-        </button>
-        <button
-                class="rounded-md bg-emerald-500 px-4 py-2 text-sm text-white hover:bg-emerald-600 transition"
-                type="button"
-        >
-            View Saved
-        </button>
-    </form>
-</div>
-
-</body>
-<script src="/src/main.js" type="module"></script>
+            <form
+                class="mx-auto flex max-w-4xl items-center gap-2"
+                id="compactSearchForm"
+            >
+                <img
+                    src="/src/assets/ico/logo.svg"
+                    alt="logo"
+                    srcset=""
+                    class="h-16 w-auto"
+                />
+                <label class="" for="browsePage"></label>
+                <input
+                    class="h-12 flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none"
+                    id="browsePage"
+                    placeholder="Enter a location"
+                    type="text"
+                />
+                <button
+                    class="browsePageSearch h-12 w-28 rounded-md bg-cyan-500 px-4 py-2 text-sm text-white transition hover:bg-cyan-600"
+                    type="submit"
+                >
+                    Search
+                </button>
+                <button
+                    class="h-12 w-28 rounded-md bg-emerald-500 px-4 py-2 text-sm text-white transition hover:bg-emerald-600"
+                    type="button"
+                >
+                    View Saved
+                </button>
+            </form>
+        </div>
+    </body>
+    <script src="/src/main.js" type="module"></script>
 </html>
