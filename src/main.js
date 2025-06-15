@@ -1,3 +1,8 @@
-import { formEvents } from './app'
+import { homeFormEvents, browseFormEvents } from './app'
 
-formEvents().then(() => console.log('Weather Rendered Success'))
+homeFormEvents().then(() =>
+    console.log('Weather Rendered Success From Homepage')
+)
+browseFormEvents().then(() =>
+    console.log('Weather Rendered Success From Browsing Page')
+)

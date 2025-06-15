@@ -12,25 +12,26 @@
             class="nep-6 mx-auto my-10 flex max-w-md flex-col items-center gap-4 rounded-lg bg-neutral-700 p-5 text-neutral-300 shadow-lg"
             id="form"
     >
+        <img src="/src/assets/ico/logo.svg" alt="logo" srcset="" class="w-auto h-44">
         <label
                 class="text-2xl font-semibold text-neutral-300"
                 for="search"
-        >Search Places</label
+        >Odin Weather</label
         >
 
         <input
                 class="w-99 rounded-md border border-gray-300 px-4 py-2 text-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none"
-                id="search"
+                id="homePage"
                 placeholder="Enter a location"
                 type="text"
         />
 
         <div class="flex w-99 justify-between gap-4">
             <button
-                    class="submit flex-1 rounded-md border border-amber-300 bg-cyan-500 px-4 py-2 text-lg text-white transition hover:bg-cyan-600"
+                    class="homePageSearch flex-1 rounded-md border border-amber-300 bg-cyan-500 px-4 py-2 text-lg text-white transition hover:bg-cyan-600"
                     type="submit"
             >
-                Send Query
+                Search
             </button>
             <button
                     class="viewSaved flex-1 rounded-md border border-amber-300 bg-emerald-500 px-4 py-2 text-lg text-white transition hover:bg-emerald-600"
@@ -51,12 +52,12 @@
         <label class="sr-only" for="search">Search Places</label>
         <input
                 class="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none"
-                id="search"
+                id="browsePage"
                 placeholder="Enter a location"
                 type="text"
         />
         <button
-                class="rounded-md bg-cyan-500 px-4 py-2 text-sm text-white hover:bg-cyan-600 transition"
+                class="browsePageSearch rounded-md bg-cyan-500 px-4 py-2 text-sm text-white hover:bg-cyan-600 transition"
                 type="submit"
         >
             Search
