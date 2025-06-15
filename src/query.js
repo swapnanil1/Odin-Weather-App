@@ -30,14 +30,14 @@ export async function fetchWeather(location) {
             location: resolvedAddress,
             lastUpdatedISO: new Date().toISOString(),
             overview_1: {
-                title: `Feels Like ${today.feelslike}°F`,
+                title: `Feels Like ${farenheitToCelcius(today.feelslike)}°C`,
                 detailPrimary: `Humidity: ${today.humidity}%`,
-                detailSecondary: `Dew Point: ${today.dew}°F`,
+                detailSecondary: `Dew Point: ${farenheitToCelcius(today.dew)}°C`,
             },
             overview_2: {
-                title: `High: ${today.tempmax}°F / Low: ${today.tempmin}°F`,
+                title: `High: ${farenheitToCelcius(today.tempmax)}°F / Low: ${farenheitToCelcius(today.tempmin)}°C`,
                 detailPrimary: `Current Conditions: ${currentConditions.conditions}`,
-                detailSecondary: `Range: ${today.tempmin}°F - ${today.tempmax}°F`,
+                detailSecondary: `Range: ${farenheitToCelcius(today.tempmin)}°C - ${farenheitToCelcius(today.tempmax)}°C`,
             },
             overview_3: {
                 title: `Precipitation: ${today.precipprob}% Chance`,
@@ -45,8 +45,8 @@ export async function fetchWeather(location) {
                 detailSecondary: `Coverage Time: ${percentageToTime(today.precipcover)} h:m`,
             },
             overview_4: {
-                title: `Wind: ${today.windspeed} mph`,
-                detailPrimary: `Gusts: ${today.windgust} mph`,
+                title: `Wind: ${milesToKM(today.windspeed)} km/h`,
+                detailPrimary: `Gusts: ${milesToKM(today.windgust)} km/h`,
                 detailSecondary: `Direction: ${degreesToCompass(today.winddir)}`,
             },
             overview_5: {
@@ -55,7 +55,7 @@ export async function fetchWeather(location) {
                 detailSecondary: `Sunset: ${today.sunset}`,
             },
             overview_6: {
-                title: `Visibility: ${today.visibility} mi`,
+                title: `Visibility: ${milesToKM(today.visibility)} km`,
                 detailPrimary: `Pressure: ${today.pressure} mb`,
                 detailSecondary: `Moon Phase: ${today.moonphase}`,
             },
@@ -116,4 +116,11 @@ function degreesToCompass(degrees) {
     const toDirection = directions[toIndex]
 
     return `${fromDirection} to ${toDirection} at ${degrees.toFixed(1)}°`
+}
+function milesToKM(speedInMiles) {
+    return Math.floor(speedInMiles * 1.60934)
+}
+function farenheitToCelcius(tempInF) {
+    const tempInC = ((tempInF - 32) * 5) / 9
+    return Math.floor(tempInC)
 }
