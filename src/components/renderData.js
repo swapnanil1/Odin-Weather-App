@@ -11,7 +11,7 @@ export default function renderWeather(weatherObject) {
             throw new Error('Invalid or empty weather data')
         }
 
-        clearPage() // Clear DOM
+        clearPage()
 
         for (let index = 1; index <= 6; index++) {
             const h2 = document.querySelector(`.overview_${index} h2`)
@@ -37,13 +37,15 @@ export default function renderWeather(weatherObject) {
 }
 
 function clearPage() {
-    const oldGrid = document.getElementById('gridContainer')
+    const oldGrid = document.getElementById('appWrapper')
     const homeQueryForm = document.getElementById('homeQueryForm')
     const browseQueryForm = document.getElementById('browseQueryForm')
+
     if (oldGrid) {
         oldGrid.innerHTML = ''
         document.body.removeChild(oldGrid)
     }
+
     if (
         !homeQueryForm.classList.contains('hidden') &&
         browseQueryForm.classList.contains('hidden')
@@ -54,33 +56,41 @@ function clearPage() {
 
     const elementsToAnimate = []
 
+    const appWrapper = document.createElement('div')
+    appWrapper.id = 'appWrapper'
+    appWrapper.classList.add(
+        'h-screen',
+        'overflow-hidden',
+        'flex',
+        'justify-center',
+        'pt-34'
+    )
+
     const gridContainer = document.createElement('div')
     gridContainer.id = 'gridContainer'
     gridContainer.classList.add(
         'grid',
-        'h-full',
         'grid-cols-1',
         'sm:grid-cols-2',
         'md:grid-cols-3',
         'grid-rows-2',
-        'content-between',
-        'gap-2',
-        'text-center',
-        'text-2xlm-10',
-        'grid',
-        'h-full',
-        'gap-x-2',
+        'gap-x-12',
         'text-center',
         'text-2xl',
-        'p-20'
+        'w-full',
+        'max-w-7xl',
+        'items-center',
+        'place-content-center'
     )
+
     for (let index = 1; index <= 6; index++) {
         const div = document.createElement('div')
         div.classList.add(
             `overview_${index}`,
-            'w-auto',
-            'min-h-12',
-            'text-neutal-300',
+            'w-full',
+            'h-full',
+            'max-h-[36vh]',
+            'text-neutral-300',
             'grid',
             'grid-cols-2',
             'grid-rows-2',
@@ -90,7 +100,8 @@ function clearPage() {
             'bg-neutral-700',
             'opacity-0',
             'rounded-xl',
-            'translate-y-4'
+            'translate-y-4',
+            'p-4'
         )
 
         const h2 = document.createElement('h2')
@@ -109,7 +120,10 @@ function clearPage() {
         gridContainer.appendChild(div)
         elementsToAnimate.push(div)
     }
-    document.body.appendChild(gridContainer)
+
+    appWrapper.appendChild(gridContainer)
+    document.body.appendChild(appWrapper)
+
     animate(
         elementsToAnimate,
         { opacity: 1, y: 0 },
