@@ -57,26 +57,29 @@ function clearPage() {
     const gridContainer = document.createElement('div')
     gridContainer.id = 'gridContainer'
     gridContainer.classList.add(
-        'm-10',
         'grid',
         'h-full',
-        'grid-cols-3',
+        'grid-cols-1',
+        'sm:grid-cols-2',
+        'md:grid-cols-3',
         'grid-rows-2',
-        'gap-20',
+        'content-between',
+        'gap-2',
         'text-center',
         'text-2xlm-10',
         'grid',
         'h-full',
-        'grid-cols-3',
-        'grid-rows-2',
-        'gap-20',
+        'gap-x-2',
         'text-center',
-        'text-2xl'
+        'text-2xl',
+        'p-20'
     )
     for (let index = 1; index <= 6; index++) {
         const div = document.createElement('div')
         div.classList.add(
             `overview_${index}`,
+            'w-auto',
+            'min-h-12',
             'text-neutal-300',
             'grid',
             'grid-cols-2',
