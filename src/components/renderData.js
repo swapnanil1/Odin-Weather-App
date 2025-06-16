@@ -1,6 +1,6 @@
 import { animate, stagger } from 'motion'
 
-export default function renderWeather(weatherObject) {
+export default function renderWeather(weatherObject, dayNumber) {
     try {
         if (
             !weatherObject ||
@@ -11,7 +11,14 @@ export default function renderWeather(weatherObject) {
             throw new Error('Invalid or empty weather data')
         }
 
-        clearPage()
+        clearPage(weatherObject.location)
+        let day = ''
+        if (dayNumber === 0) {
+            day = 'today'
+        }
+        if (dayNumber === 1) {
+            day = 'tomorrow'
+        }
 
         for (let index = 1; index <= 6; index++) {
             const h2 = document.querySelector(`.overview_${index} h2`)
@@ -27,16 +34,18 @@ export default function renderWeather(weatherObject) {
                 continue
             }
 
-            h2.textContent = weatherObject[`overview_${index}`].title
-            p1.textContent = weatherObject[`overview_${index}`].detailPrimary
-            p2.textContent = weatherObject[`overview_${index}`].detailSecondary
+            h2.textContent = weatherObject[day][`overview_${index}`].title
+            p1.textContent =
+                weatherObject[day][`overview_${index}`].detailPrimary
+            p2.textContent =
+                weatherObject[day][`overview_${index}`].detailSecondary
         }
     } catch (error) {
         console.error('Failed to render weather data:', error.message)
     }
 }
 
-function clearPage() {
+function clearPage(location) {
     const oldGrid = document.getElementById('appWrapper')
     const homeQueryForm = document.getElementById('homeQueryForm')
     const browseQueryForm = document.getElementById('browseQueryForm')
@@ -120,7 +129,7 @@ function clearPage() {
         gridContainer.appendChild(div)
         elementsToAnimate.push(div)
     }
-
+    gridContainer.dataset.location = location
     appWrapper.appendChild(gridContainer)
     document.body.appendChild(appWrapper)
 

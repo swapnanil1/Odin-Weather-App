@@ -1,17 +1,13 @@
-import { fetchWeather } from './query'
+import { fetchWeather } from './fetchWeather.js'
 import * as localDB from './components/localDB'
 import renderWeather from './components/renderData'
-export function app() {
-    // Placeholder for app initialization logic
-    // const weatherData = fetchWeather()
-    // console.log(weatherData.data.resolvedAddress)
-}
+import selectDayTabs from './components/selectDayTabs.js'
 
 export async function homeFormEvents() {
-    const locationInputEl = document.getElementById('homePage')
+    const homePageQueryLocation = document.getElementById('homePage')
     const submitButtonEl = document.querySelector('.homePageSearch')
     const viewSavedButtonEl = document.querySelector('.viewSaved')
-
+    const browsePageQueryLocation = document.getElementById('browsePage') // to carry on the value searched in the homepage to browsePage input field
     viewSavedButtonEl.addEventListener('click', () => {
         const savedWeatherData = localDB.getAllWeatherData()
         console.log(savedWeatherData)
@@ -20,7 +16,7 @@ export async function homeFormEvents() {
     submitButtonEl.addEventListener('click', async (event) => {
         event.preventDefault()
         try {
-            const location = locationInputEl.value.trim()
+            const location = homePageQueryLocation.value.trim()
             if (!location) {
                 console.warn('No location provided')
                 return
@@ -28,8 +24,9 @@ export async function homeFormEvents() {
 
             const weatherData = await fetchWeather(location)
             localDB.saveWeatherData(weatherData)
-            renderWeather(weatherData)
-            console.log(weatherData)
+            await renderWeather(weatherData, 0) // make it pass another arg to renderDataFn where if its 0 then its today if its 1 its tomorrow | and in the components/tabs.js file i can call renderweather with 1 or 2 ... to get its specific date
+            selectDayTabs()
+            browsePageQueryLocation.value = homePageQueryLocation.value.trim()
         } catch (error) {
             console.error('Failed to fetch weather data:', error)
         }
@@ -57,7 +54,8 @@ export async function browseFormEvents() {
 
             const weatherData = await fetchWeather(location)
             localDB.saveWeatherData(weatherData)
-            renderWeather(weatherData)
+            await renderWeather(weatherData, 0)
+            selectDayTabs()
             console.log(weatherData)
         } catch (error) {
             console.error('Failed to fetch weather data:', error)
