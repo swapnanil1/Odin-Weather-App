@@ -20,6 +20,9 @@ export default function renderWeather(weatherObject, dayNumber) {
             day = 'tomorrow'
         }
 
+        const dateHeader = document.querySelector('.dateHeader')
+        dateHeader.innerText = formatDateToText(weatherObject[day].date)
+
         for (let index = 1; index <= 6; index++) {
             const h2 = document.querySelector(`.overview_${index} h2`)
             const p1 = document.querySelector(
@@ -67,11 +70,15 @@ function clearPage(location) {
 
     const appWrapper = document.createElement('div')
     appWrapper.id = 'appWrapper'
+    const dateHeader = document.createElement('div')
+    dateHeader.classList.add('dateHeader', 'text-2xl')
+
     appWrapper.classList.add(
         'h-screen',
         'overflow-hidden',
         'flex',
-        'justify-center',
+        'flex-col',
+        'items-center',
         'pt-34'
     )
 
@@ -79,6 +86,7 @@ function clearPage(location) {
     gridContainer.id = 'gridContainer'
     gridContainer.classList.add(
         'grid',
+        'h-full',
         'grid-cols-1',
         'sm:grid-cols-2',
         'md:grid-cols-3',
@@ -130,6 +138,7 @@ function clearPage(location) {
         elementsToAnimate.push(div)
     }
     gridContainer.dataset.location = location
+    appWrapper.appendChild(dateHeader)
     appWrapper.appendChild(gridContainer)
     document.body.appendChild(appWrapper)
 
@@ -138,4 +147,9 @@ function clearPage(location) {
         { opacity: 1, y: 0 },
         { delay: stagger(0.1), duration: 0.5, easing: 'ease-out' }
     )
+}
+function formatDateToText(dateStr) {
+    const date = new Date(dateStr)
+    const options = { year: 'numeric', month: 'long', day: 'numeric' }
+    return date.toLocaleDateString('en-US', options)
 }

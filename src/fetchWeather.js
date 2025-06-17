@@ -27,6 +27,7 @@ export async function fetchWeather(location) {
             location: resolvedAddress,
             lastUpdatedISO: new Date().toISOString(),
             today: {
+                date: days[0].datetime,
                 overview_1: {
                     title: `Feels Like ${farenheitToCelcius(days[0].feelslike)}°C`,
                     detailPrimary: `Humidity: ${days[0].humidity}%`,
@@ -59,6 +60,7 @@ export async function fetchWeather(location) {
                 },
             },
             tomorrow: {
+                date: days[1].datetime,
                 overview_1: {
                     title: `Feels Like ${farenheitToCelcius(days[1].feelslike)}°C`,
                     detailPrimary: `Humidity: ${days[1].humidity}%`,
