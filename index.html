@@ -8,7 +8,7 @@
     </head>
 
     <body
-        class="box-border h-screen w-full overflow-x-hidden overflow-y-auto bg-neutral-800 font-[Inter] text-neutral-200"
+        class="box-border h-screen w-full overflow-x-hidden overflow-y-auto bg-neutral-800 font-[poppins] text-neutral-200"
     >
         <div class="pt-20" id="homeQueryForm">
             <form
@@ -35,13 +35,13 @@
 
                 <div class="flex w-full justify-between gap-4">
                     <button
-                        class="homePageSearch flex-1 rounded-md border border-amber-300 bg-cyan-500 px-4 py-2 text-lg text-white transition hover:bg-cyan-600"
+                        class="homePageSearch flex-1 rounded-md border border-amber-300 bg-cyan-500 px-4 py-2 font-[Inter] text-lg text-white transition hover:bg-cyan-600"
                         type="submit"
                     >
                         Search
                     </button>
                     <button
-                        class="viewSaved flex-1 rounded-md border border-amber-300 bg-emerald-500 px-4 py-2 text-lg text-white transition hover:bg-emerald-600"
+                        class="viewSaved flex-1 rounded-md border border-amber-300 bg-emerald-500 px-4 py-2 font-[Inter] text-lg text-white transition hover:bg-emerald-600"
                         type="button"
                     >
                         View Saved
@@ -71,13 +71,13 @@
                     type="text"
                 />
                 <button
-                    class="browsePageSearch h-12 w-28 rounded-md bg-cyan-500 px-4 py-2 text-sm text-white transition hover:bg-cyan-600"
+                    class="browsePageSearch h-12 w-28 rounded-md bg-cyan-500 px-4 py-2 font-[Inter] text-sm text-white transition hover:bg-cyan-600"
                     type="submit"
                 >
                     Search
                 </button>
                 <button
-                    class="viewSaved h-12 w-28 rounded-md bg-emerald-500 px-4 py-2 text-sm text-white transition hover:bg-emerald-600"
+                    class="viewSaved h-12 w-28 rounded-md bg-emerald-500 px-4 py-2 font-[Inter] text-sm text-white transition hover:bg-emerald-600"
                     type="button"
                 >
                     View Saved
@@ -108,25 +108,40 @@
                 </div>
             </div>
         </div>
-        <div
-            id="overlay"
-            class="bg-opacity-50 fixed inset-0 z-40 hidden bg-black"
-        ></div>
+        <div id="overlay" class="bg-opacity-50 fixed inset-0 hidden"></div>
         <dialog
             id="view-saved-modal"
-            class="z-50 rounded-md bg-white p-6 backdrop:backdrop-blur-sm"
+            class="m-auto rounded-md bg-transparent text-white backdrop:backdrop-blur-sm"
         >
-            <div class="modal-content text-center">
-                This is the modal content
+            Previous Searches
+            <div
+                class="modal-content flex min-w-[300px] flex-col items-center justify-center rounded-md bg-neutral-700 p-10 text-center"
+            >
+                <h2 class="mb-4 text-2xl font-bold">Item Saved!</h2>
+                <p>Your item has been successfully saved to your list.</p>
             </div>
             <button
                 id="closeBtn"
-                class="close-modal mt-4 rounded bg-red-500 px-4 py-2 text-white"
+                class="close-modal absolute top-8 right-2 cursor-pointer rounded-full bg-red-500 p-1 text-white hover:bg-red-600"
                 type="button"
             >
-                Close
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
             </button>
         </dialog>
+
         <script
             src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
             type="module"

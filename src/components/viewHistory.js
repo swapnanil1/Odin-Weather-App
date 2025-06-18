@@ -20,9 +20,24 @@ export default function viewHistory() {
             e.preventDefault()
             modalContainer.innerHTML = ''
             const ul = document.createElement('ul')
+            ul.classList.add(
+                'grid',
+                'grid-rows-10',
+                'grid-cols-3',
+                'h-full',
+                'w-full',
+                'gap-2'
+            )
             getAllWeatherData().forEach((weatherData) => {
                 const li = document.createElement('li')
                 li.textContent = weatherData.location
+                li.classList.add(
+                    'text-2xl',
+                    'border-2',
+                    'border-neutral-500',
+                    'rounded-sm',
+                    'p-2'
+                )
                 li.addEventListener('click', () => {
                     renderWeather(weatherData, 0)
                     const browsePageQueryLocation =
