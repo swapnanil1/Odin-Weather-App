@@ -13,28 +13,6 @@ function getWeatherIconHTML(condition) {
         return '<ion-icon name="snow-outline"></ion-icon>'
     return '<ion-icon name="partly-sunny-outline"></ion-icon>'
 }
-
-function getCompassRotation(direction) {
-    // const dir = direction.toUpperCase().split(' ')[0]
-    const compass = {
-        N: 0,
-        NE: 45,
-        ENE: 67.5,
-        E: 90,
-        ESE: 112.5,
-        SE: 135,
-        SSE: 157.5,
-        S: 180,
-        SSW: 202.5,
-        SW: 225,
-        WSW: 247.5,
-        W: 270,
-        WNW: 292.5,
-        NW: 315,
-        NNW: 337.5,
-    }
-    return compass[direction] || 0
-}
 function getDynamicWindIcon(degree) {
     return `
         <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" 
