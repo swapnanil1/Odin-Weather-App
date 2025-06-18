@@ -108,7 +108,25 @@
                 </div>
             </div>
         </div>
-        <dialog id="view-saved-modal"></dialog>
+        <div
+            id="overlay"
+            class="bg-opacity-50 fixed inset-0 z-40 hidden bg-black"
+        ></div>
+        <dialog
+            id="view-saved-modal"
+            class="z-50 rounded-md bg-white p-6 backdrop:backdrop-blur-sm"
+        >
+            <div class="modal-content text-center">
+                This is the modal content
+            </div>
+            <button
+                id="closeBtn"
+                class="close-modal mt-4 rounded bg-red-500 px-4 py-2 text-white"
+                type="button"
+            >
+                Close
+            </button>
+        </dialog>
         <script
             src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
             type="module"
