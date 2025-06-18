@@ -1,5 +1,5 @@
 import { animate, stagger } from 'motion'
-
+import { getDynamicWindIcon } from './stateIcon.js'
 export default function renderWeather(weatherObject, dayNumber) {
     try {
         if (
@@ -25,6 +25,8 @@ export default function renderWeather(weatherObject, dayNumber) {
 
         for (let index = 1; index <= 6; index++) {
             const h2 = document.querySelector(`.overview_${index} h2`)
+            const iconDiv = document.querySelector(`.overview_${index} .icon`)
+            iconDiv.classList.add('flex', 'justify-center')
             const p1 = document.querySelector(
                 `.overview_${index} .detailPrimary`
             )
@@ -38,6 +40,18 @@ export default function renderWeather(weatherObject, dayNumber) {
             }
 
             h2.textContent = weatherObject[day][`overview_${index}`].title
+            if (index === 4) {
+                iconDiv.innerHTML = getDynamicWindIcon(
+                    weatherObject[day][`overview_${index}`].direction
+                )
+            } else {
+                iconDiv.innerHTML = `<ion-icon
+                className="col-start-1 col-end-3 max-h-min text-center text-4xl"
+                style="font-size: 6rem; color: black"
+                name="${weatherObject[day][`overview_${index}`].icon}"
+                role="img"
+            ></ion-icon>`
+            }
             p1.textContent =
                 weatherObject[day][`overview_${index}`].detailPrimary
             p2.textContent =
@@ -110,7 +124,7 @@ function clearPage(location) {
             'text-neutral-300',
             'grid',
             'grid-cols-2',
-            'grid-rows-2',
+            'grid-rows-3',
             'items-center',
             'border-2',
             'border-teal-500',
@@ -123,6 +137,8 @@ function clearPage(location) {
 
         const h2 = document.createElement('h2')
         h2.classList.add('col-start-1', 'col-end-3')
+        const icon = document.createElement('div')
+        icon.classList.add('icon', 'col-start-1', 'col-end-3')
 
         const p1 = document.createElement('p')
         p1.classList.add('detailPrimary')
@@ -131,6 +147,7 @@ function clearPage(location) {
         p2.classList.add('detailSecondary')
 
         div.appendChild(h2)
+        div.appendChild(icon)
         div.appendChild(p1)
         div.appendChild(p2)
 

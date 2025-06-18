@@ -30,31 +30,38 @@ export async function fetchWeather(location) {
                 date: days[0].datetime,
                 overview_1: {
                     title: `Feels Like ${farenheitToCelcius(days[0].feelslike)}°C`,
+                    icon: 'water-outline',
                     detailPrimary: `Humidity: ${days[0].humidity}%`,
                     detailSecondary: `Dew Point: ${farenheitToCelcius(days[0].dew)}°C`,
                 },
                 overview_2: {
                     title: `High: ${farenheitToCelcius(days[0].tempmax)}°F / Low: ${farenheitToCelcius(days[0].tempmin)}°C`,
+                    icon: getWeatherIcon(currentConditions.conditions),
                     detailPrimary: `Current Conditions: ${currentConditions.conditions}`,
                     detailSecondary: `Range: ${farenheitToCelcius(days[0].tempmin)}°C - ${farenheitToCelcius(days[0].tempmax)}°C`,
                 },
                 overview_3: {
                     title: `Precipitation: ${days[0].precipprob}% Chance`,
+                    icon: getRainIcon(days[0].precipprob),
                     detailPrimary: `Rainfall: ${days[0].precip} in`,
                     detailSecondary: `Coverage Time: ${percentageToTime(days[0].precipcover)} h:m`,
                 },
                 overview_4: {
                     title: `Wind: ${milesToKM(days[0].windspeed)} km/h`,
+                    icon: `navigate-outline`,
                     detailPrimary: `Gusts: ${milesToKM(days[0].windgust)} km/h`,
                     detailSecondary: `Direction: ${degreesToCompass(days[0].winddir)}`,
+                    direction: days[0].winddir,
                 },
                 overview_5: {
                     title: `UV Index: ${days[0].uvindex}`,
+                    icon: `glasses-outline`,
                     detailPrimary: `Sunrise: ${days[0].sunrise}`,
                     detailSecondary: `Sunset: ${days[0].sunset}`,
                 },
                 overview_6: {
                     title: `Visibility: ${milesToKM(days[0].visibility)} km`,
+                    icon: `eye-outline`,
                     detailPrimary: `Pressure: ${days[0].pressure} mb`,
                     detailSecondary: `Moon Phase: ${days[0].moonphase}`,
                 },
@@ -63,31 +70,38 @@ export async function fetchWeather(location) {
                 date: days[1].datetime,
                 overview_1: {
                     title: `Feels Like ${farenheitToCelcius(days[1].feelslike)}°C`,
+                    icon: 'water-outline',
                     detailPrimary: `Humidity: ${days[1].humidity}%`,
                     detailSecondary: `Dew Point: ${farenheitToCelcius(days[1].dew)}°C`,
                 },
                 overview_2: {
                     title: `High: ${farenheitToCelcius(days[1].tempmax)}°F / Low: ${farenheitToCelcius(days[0].tempmin)}°C`,
+                    icon: getWeatherIcon(currentConditions.conditions),
                     detailPrimary: `Current Conditions: ${currentConditions.conditions}`,
                     detailSecondary: `Range: ${farenheitToCelcius(days[1].tempmin)}°C - ${farenheitToCelcius(days[0].tempmax)}°C`,
                 },
                 overview_3: {
                     title: `Precipitation: ${days[1].precipprob}% Chance`,
+                    icon: getRainIcon(days[0].precipprob),
                     detailPrimary: `Rainfall: ${days[1].precip} in`,
                     detailSecondary: `Coverage Time: ${percentageToTime(days[1].precipcover)} h:m`,
                 },
                 overview_4: {
                     title: `Wind: ${milesToKM(days[1].windspeed)} km/h`,
+                    icon: `navigate-outline`,
                     detailPrimary: `Gusts: ${milesToKM(days[1].windgust)} km/h`,
                     detailSecondary: `Direction: ${degreesToCompass(days[1].winddir)}`,
+                    direction: days[1].winddir,
                 },
                 overview_5: {
                     title: `UV Index: ${days[1].uvindex}`,
+                    icon: `glasses-outline`,
                     detailPrimary: `Sunrise: ${days[1].sunrise}`,
                     detailSecondary: `Sunset: ${days[1].sunset}`,
                 },
                 overview_6: {
                     title: `Visibility: ${milesToKM(days[1].visibility)} km`,
+                    icon: `eye-outline`,
                     detailPrimary: `Pressure: ${days[1].pressure} mb`,
                     detailSecondary: `Moon Phase: ${days[1].moonphase}`,
                 },
@@ -155,4 +169,26 @@ function milesToKM(speedInMiles) {
 function farenheitToCelcius(tempInF) {
     const tempInC = ((tempInF - 32) * 5) / 9
     return Math.floor(tempInC)
+}
+function getRainIcon(percent) {
+    if (percent <= 100 && percent > 75) {
+        return 'thunderstorm-outline'
+    } else if (percent > 50 && percent <= 75) {
+        return 'rainy-outline'
+    } else if (percent > 25 && percent <= 50) {
+        return 'umbrella-outline'
+    } else {
+        return 'happy-outline'
+    }
+}
+function getWeatherIcon(condition) {
+    const cond = condition.toLowerCase()
+    if (cond.includes('rain')) return 'rainy-outline'
+    if (cond.includes('overcast') || cond.includes('cloud'))
+        return 'cloudy-outline'
+    if (cond.includes('sun') || cond.includes('clear')) return 'sunny-outline'
+    if (cond.includes('storm') || cond.includes('thunder'))
+        return 'thunderstorm-outline'
+    if (cond.includes('snow')) return 'snow-outline'
+    return 'partly-sunny-outline'
 }
