@@ -63,13 +63,12 @@ export default function renderWeather(weatherObject, dayNumber) {
 }
 
 function clearPage(location) {
-    const oldGrid = document.getElementById('appWrapper')
     const homeQueryForm = document.getElementById('homeQueryForm')
     const browseQueryForm = document.getElementById('browseQueryForm')
 
-    if (oldGrid) {
-        oldGrid.innerHTML = ''
-        document.body.removeChild(oldGrid)
+    const mainContent = document.getElementById('main-content')
+    if (mainContent) {
+        mainContent.innerHTML = ''
     }
 
     if (
@@ -78,6 +77,8 @@ function clearPage(location) {
     ) {
         homeQueryForm.classList.add('hidden')
         browseQueryForm.classList.remove('hidden')
+
+        mainContent.classList.add('pt-28')
     }
 
     const elementsToAnimate = []
@@ -85,42 +86,48 @@ function clearPage(location) {
     const appWrapper = document.createElement('div')
     appWrapper.id = 'appWrapper'
     const dateHeader = document.createElement('div')
-    dateHeader.classList.add('dateHeader', 'text-2xl')
+    dateHeader.classList.add('dateHeader', 'text-2xl', 'md:mt-5')
 
     appWrapper.classList.add(
-        'h-screen',
-        'overflow-hidden',
         'flex',
         'flex-col',
+        'w-full',
+        'pt-20',
+        'pb-2',
         'items-center',
-        'pt-34'
+        'md:h-screen',
+        'md:overflow-hidden',
+        'md:pt-30'
     )
 
     const gridContainer = document.createElement('div')
     gridContainer.id = 'gridContainer'
+
     gridContainer.classList.add(
         'grid',
-        'h-full',
+        'w-full',
+        'max-w-7xl',
+        'gap-x-12',
+        'gap-y-4',
+        'text-center',
+        'text-2xl',
+        'p-4',
         'grid-cols-1',
         'sm:grid-cols-2',
         'md:grid-cols-3',
-        'grid-rows-2',
-        'gap-x-12',
-        'text-center',
-        'text-2xl',
-        'w-full',
-        'max-w-7xl',
-        'items-center',
-        'place-content-center'
+
+        'md:grid-rows-2',
+        'md:place-content-center',
+        'md:h-full'
     )
 
     for (let index = 1; index <= 6; index++) {
         const div = document.createElement('div')
+
         div.classList.add(
             `overview_${index}`,
             'w-full',
             'h-full',
-            'max-h-[36vh]',
             'text-neutral-300',
             'grid',
             'grid-cols-2',
@@ -139,25 +146,22 @@ function clearPage(location) {
         h2.classList.add('col-start-1', 'col-end-3')
         const icon = document.createElement('div')
         icon.classList.add('icon', 'col-start-1', 'col-end-3')
-
         const p1 = document.createElement('p')
         p1.classList.add('detailPrimary')
-
         const p2 = document.createElement('p')
         p2.classList.add('detailSecondary')
-
         div.appendChild(h2)
         div.appendChild(icon)
         div.appendChild(p1)
         div.appendChild(p2)
-
         gridContainer.appendChild(div)
         elementsToAnimate.push(div)
     }
     gridContainer.dataset.location = location
     appWrapper.appendChild(dateHeader)
     appWrapper.appendChild(gridContainer)
-    document.body.appendChild(appWrapper)
+
+    mainContent.appendChild(appWrapper)
 
     animate(
         elementsToAnimate,
