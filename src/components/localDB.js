@@ -36,7 +36,8 @@ export function getWeatherData(location) {
 }
 
 export function getAllWeatherData() {
-    return getDatabase()
+    const db = getDatabase()
+    return Object.values(db)
 }
 
 export function deleteWeatherData(location) {
