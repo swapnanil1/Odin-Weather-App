@@ -6,11 +6,10 @@
         <link href="src/assets/styles/main.css" rel="stylesheet" />
         <title>Odin-Weather</title>
     </head>
-
     <body
         class="box-border h-screen w-full overflow-x-hidden overflow-y-auto bg-neutral-800 font-[poppins] text-neutral-200"
     >
-        <div class="pt-20" id="homeQueryForm">
+        <div class="pt-10 sm:pt-20" id="homeQueryForm">
             <form
                 action=""
                 class="mx-auto my-10 flex max-w-md flex-col items-center gap-4 rounded-lg bg-neutral-700 p-5 text-neutral-300 shadow-lg"
@@ -18,22 +17,20 @@
             >
                 <ion-icon
                     name="cloud-circle-outline"
-                    style="font-size: 11rem; color: black"
+                    class="text-8xl text-black sm:text-[11rem]"
                 ></ion-icon>
                 <label
                     class="text-2xl font-semibold text-neutral-300"
                     for="homePage"
                     >Odin Weather</label
                 >
-
                 <input
                     class="w-full rounded-md border border-gray-300 px-4 py-2 text-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none"
                     id="homePage"
                     placeholder="Enter a location"
                     type="text"
                 />
-
-                <div class="flex w-full justify-between gap-4">
+                <div class="flex w-full flex-col gap-4 sm:flex-row">
                     <button
                         class="homePageSearch flex-1 rounded-md border border-amber-300 bg-cyan-500 px-4 py-2 font-[Inter] text-lg text-white transition hover:bg-cyan-600"
                         type="submit"
@@ -50,18 +47,17 @@
             </form>
             <div class="savedHistory"></div>
         </div>
-
         <div
             id="browseQueryForm"
             class="fixed top-0 left-0 z-50 hidden w-full bg-neutral-700 shadow-md"
         >
             <form
-                class="mx-auto flex max-w-4xl items-center gap-2 p-2"
+                class="mx-auto flex max-w-4xl flex-wrap items-center gap-2 p-2"
                 id="compactSearchForm"
             >
                 <ion-icon
                     name="cloud-circle-outline"
-                    style="font-size: 4rem; color: black"
+                    class="text-5xl text-black"
                 ></ion-icon>
                 <label class="sr-only" for="browsePage">Search</label>
                 <input
@@ -71,13 +67,13 @@
                     type="text"
                 />
                 <button
-                    class="browsePageSearch h-12 w-28 rounded-md bg-cyan-500 px-4 py-2 font-[Inter] text-sm text-white transition hover:bg-cyan-600"
+                    class="browsePageSearch h-12 flex-grow rounded-md bg-cyan-500 px-2 py-2 font-[Inter] text-sm text-white transition hover:bg-cyan-600 sm:w-28 sm:flex-grow-0 sm:px-4"
                     type="submit"
                 >
                     Search
                 </button>
                 <button
-                    class="viewSaved h-12 w-28 rounded-md bg-emerald-500 px-4 py-2 font-[Inter] text-sm text-white transition hover:bg-emerald-600"
+                    class="viewSaved h-12 flex-grow rounded-md bg-emerald-500 px-2 py-2 font-[Inter] text-sm text-white transition hover:bg-emerald-600 sm:w-28 sm:flex-grow-0 sm:px-4"
                     type="button"
                 >
                     View Saved
@@ -88,7 +84,7 @@
                     class="todayTab flex h-12 w-full items-center justify-center"
                 >
                     <button
-                        class="cursor-pointer text-2xl hover:text-teal-400"
+                        class="cursor-pointer text-xl hover:text-teal-400 sm:text-2xl"
                         id="todayBtn"
                         type="button"
                     >
@@ -99,7 +95,7 @@
                     class="tomorrowTab flex h-12 w-full items-center justify-center"
                 >
                     <button
-                        class="cursor-pointer text-2xl hover:text-teal-400"
+                        class="cursor-pointer text-xl hover:text-teal-400 sm:text-2xl"
                         id="tomorrowBtn"
                         type="button"
                     >
@@ -113,35 +109,32 @@
             id="view-saved-modal"
             class="m-auto rounded-md bg-transparent text-white backdrop:backdrop-blur-sm"
         >
-            Previous Searches
+            <h2 class="mb-4 text-2xl font-bold">Previous Searches</h2>
             <div
-                class="modal-content flex min-w-[300px] flex-col items-center justify-center rounded-md bg-neutral-700 p-10 text-center"
+                class="modal-content relative flex min-w-[300px] flex-col items-center justify-center rounded-md bg-neutral-700 p-6 text-center sm:p-10"
             >
-                <h2 class="mb-4 text-2xl font-bold">Item Saved!</h2>
-                <p>Your item has been successfully saved to your list.</p>
-            </div>
-            <button
-                id="closeBtn"
-                class="close-modal absolute top-8 right-2 cursor-pointer rounded-full bg-red-500 p-1 text-white hover:bg-red-600"
-                type="button"
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                <button
+                    id="closeBtn"
+                    class="close-modal absolute top-2 right-2 cursor-pointer rounded-full bg-red-500 p-1 text-white hover:bg-red-600"
+                    type="button"
                 >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                    />
-                </svg>
-            </button>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"
+                        />
+                    </svg>
+                </button>
+            </div>
         </dialog>
-
         <script
             src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
             type="module"
