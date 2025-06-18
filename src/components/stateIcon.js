@@ -16,7 +16,7 @@ function getWeatherIconHTML(condition) {
 function getDynamicWindIcon(degree) {
     return `
         <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" 
-             style="transform: rotate(${degree}deg); width: 6rem; height: 6rem; color: black;">
+             style="transform: rotate(${180 - degree}deg); width: 6rem; height: 6rem; color: black;">
             <path d="M448 64L64 240.14h200a8 8 0 018 8V448z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
         </svg>
     `
