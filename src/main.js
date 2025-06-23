@@ -1,4 +1,4 @@
-import { homeFormEvents, browseFormEvents } from './app'
+import { browseFormEvents, homeFormEvents } from './app'
 import viewHistory from './components/viewHistory.js'
 
 homeFormEvents().then(() =>

@@ -1,8 +1,9 @@
 import { fetchWeather } from './fetchWeather.js'
 import * as localDB from './components/localDB'
+import { getAllWeatherData } from './components/localDB'
 import renderWeather from './components/renderData'
 import selectDayTabs from './components/selectDayTabs.js'
-import { getAllWeatherData } from './components/localDB'
+import toggleLoading from './components/loading.js'
 
 export async function homeFormEvents() {
     const homePageQueryLocation = document.getElementById('homePage')
@@ -19,6 +20,7 @@ export async function homeFormEvents() {
 
             const weatherData = await fetchWeather(location)
             localDB.saveWeatherData(weatherData)
+            toggleLoading(2000)
             await renderWeather(weatherData, 0) // make it pass another arg to renderDataFn where if its 0 then its today if its 1 its tomorrow | and in the components/tabs.js file i can call renderweather with 1 or 2 ... to get its specific date
             selectDayTabs()
             browsePageQueryLocation.value = homePageQueryLocation.value.trim()
@@ -46,6 +48,7 @@ export async function browseFormEvents() {
 
             const weatherData = await fetchWeather(location)
             localDB.saveWeatherData(weatherData)
+            toggleLoading(2000)
             await renderWeather(weatherData, 0)
             selectDayTabs()
             console.log(`get all db ${getAllWeatherData}`)

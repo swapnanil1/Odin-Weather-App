@@ -9,6 +9,14 @@
     <body
         class="box-border w-full overflow-x-hidden bg-neutral-800 font-[poppins] text-neutral-200"
     >
+        <div
+            class="fixed inset-0 z-50 hidden h-[100vh] w-[100vw] bg-black/30 backdrop-blur-sm"
+            id="loading"
+        >
+            <div
+                class="m-auto mt-[calc(50vh-3.5rem)] h-28 w-28 animate-spin rounded-full border-8 border-t-teal-600"
+            ></div>
+        </div>
         <div class="pt-10 sm:pt-20" id="homeQueryForm">
             <form
                 action=""
@@ -16,8 +24,8 @@
                 id="form"
             >
                 <ion-icon
-                    name="cloud-circle-outline"
                     class="text-8xl text-black sm:text-[11rem]"
+                    name="cloud-circle-outline"
                 ></ion-icon>
                 <label
                     class="text-2xl font-semibold text-neutral-300"
@@ -48,16 +56,16 @@
             <div class="savedHistory"></div>
         </div>
         <div
+            class="fixed top-0 left-0 hidden w-full bg-neutral-700 shadow-md"
             id="browseQueryForm"
-            class="fixed top-0 left-0 z-50 hidden w-full bg-neutral-700 shadow-md"
         >
             <form
                 class="mx-auto flex max-w-4xl flex-wrap items-center gap-2 p-2"
                 id="compactSearchForm"
             >
                 <ion-icon
-                    name="cloud-circle-outline"
                     class="text-5xl text-black"
+                    name="cloud-circle-outline"
                 ></ion-icon>
                 <label class="sr-only" for="browsePage">Search</label>
                 <input
@@ -104,38 +112,38 @@
                 </div>
             </div>
         </div>
-        <div id="overlay" class="bg-opacity-50 fixed inset-0 hidden"></div>
+        <div class="bg-opacity-50 fixed inset-0 hidden" id="overlay"></div>
         <dialog
-            id="view-saved-modal"
             class="m-auto rounded-md bg-transparent text-white backdrop:backdrop-blur-sm"
+            id="view-saved-modal"
         >
             <h2 class="mb-4 text-2xl font-bold">Previous Searches</h2>
             <div
                 class="modal-content relative flex min-w-[300px] flex-col items-center justify-center rounded-md bg-neutral-700 p-6 text-center sm:p-10"
             >
                 <button
-                    id="closeBtn"
                     class="close-modal absolute top-2 right-2 cursor-pointer rounded-full bg-red-500 p-1 text-white hover:bg-red-600"
+                    id="closeBtn"
                     type="button"
                 >
                     <svg
-                        xmlns="http://www.w3.org/2000/svg"
                         class="h-6 w-6"
                         fill="none"
-                        viewBox="0 0 24 24"
                         stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
                     >
                         <path
+                            d="M6 18L18 6M6 6l12 12"
                             stroke-linecap="round"
                             stroke-linejoin="round"
                             stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12"
                         />
                     </svg>
                 </button>
             </div>
         </dialog>
-        <main id="main-content" class="pt-28 md:pt-0"></main>
+        <main class="pt-28 md:pt-0" id="main-content"></main>
         <script
             src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
             type="module"
